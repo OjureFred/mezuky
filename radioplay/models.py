@@ -9,7 +9,7 @@ class Song(models.Model):
     song_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return ISRC
+        return self.ISRC
 
 class Channel(models.Model):
     channel_name = models.CharField(max_length=100)
@@ -17,7 +17,7 @@ class Channel(models.Model):
     channel_country = models.CharField(max_length=100)
 
     def __str__(self):
-        return channel_name
+        return self.channel_name
 
 class Plays(models.Model):
     song = models.ForeignKey(Song, blank=True, null=True, on_delete= models.CASCADE)
@@ -26,4 +26,4 @@ class Plays(models.Model):
     plays = models.IntegerField(default=1)
 
     def __str__(self):
-        return song
+        return self.song.ISRC

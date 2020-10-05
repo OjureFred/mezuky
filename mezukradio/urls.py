@@ -19,5 +19,5 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('radioplay/', include('radioplay.urls')),
+    path('', include('radioplay.urls')),
 ]

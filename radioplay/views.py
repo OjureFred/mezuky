@@ -50,6 +50,14 @@ def channelUpdate(request, pk):
     
     return JsonResponse(serializer.data)
 
+@api_view(['DELETE'])
+def channelDelete(request, pk):
+    channel = Channel.objects.get(id=pk)
+    serializer = ChannelSerializer(data=request.data)
+    channel.delete()
+
+    return JsonResponse(serializer.data)
+
 
 
 

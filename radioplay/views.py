@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 
 from .models import Channel, Song, Plays
-from .serializers import ChannelSerializer, SongSerializer
+from .serializers import ChannelSerializer, SongSerializer, PlaysSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -15,8 +15,6 @@ def apiOverview(request):
         'Create': '/channels-create/',
         'Update': '/channels-update/<str:pk>/',
         'Delete': '/channels-delete/<str:pk>/',
-        
-        
     }
     return JsonResponse(api_urls)
 
@@ -65,6 +63,47 @@ def songsList(request):
     serializer = SongSerializer(songs, many=True)
 
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+def songDetail(request, pk):
+    song = Song.objects.get(id=pk)
+    serializer = SongSerializer(song, many=False)
+
+    return JsonResponse(serializer.data)
+
+@api_view(['POST'])
+def songCreate(request):
+    serializer = SongSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    
+    return JsonResponse(serializer.data)
+
+@api_view(['POST'])
+def songUpdate(request, pk):
+    song = Song.objects.get(id=pk)
+    serializer = SongSerializer(instance=song, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    
+    return JsonResponse(serializer.data)
+
+@api_view(['DELETE'])
+def songDelete(request, pk):
+    song = Song.objects.get(id=pk)
+    serializer = SongSerializer(data=request.data)
+    song.delete()
+
+    return JsonResponse(serializer.data)
+
+@api_view(['GET'])
+def playsList(request):
+    plays = Plays.objects.all()
+    serializer = PlaysSerializer(plays, many=True)
+
+    return JsonResponse(serializer.data, safe=False)
+
+
 
 
 

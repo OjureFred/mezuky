@@ -11,3 +11,8 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = '__all__'
+
+class PlaysSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Plays
+        fields = '__all__'

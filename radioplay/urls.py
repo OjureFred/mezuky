@@ -12,5 +12,11 @@ urlpatterns = [
     path('channel-delete/<str:pk>/', views.channelDelete, name='channel-delete'),
 
     path('songs-list/', views.songsList, name='songs-list'),
+    path('song-detail/<str:pk>/', views.songDetail, name='song-detail'),
+    path('song-create/', views.songCreate, name='song-create'),
+    path('song-update/<str:pk>/', views.songUpdate, name='song-update'),
+    path('song-delete/<str:pk>/', views.songDelete, name='song-delete'),
+
+    path('plays-list/', views.playsList, name='plays-list'),
 
 ]

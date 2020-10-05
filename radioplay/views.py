@@ -39,7 +39,17 @@ def channelCreate(request):
     if serializer.is_valid():
         serializer.save()
     
-    return Response(serializer.data)
+    return JsonResponse(serializer.data)
+
+@api_view(['POST'])
+def channelUpdate(request, pk):
+    channel = Channel.objects.get(id=pk)
+    serializer = ChannelSerializer(instance=channel, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    
+    return JsonResponse(serializer.data)
+
 
 
 

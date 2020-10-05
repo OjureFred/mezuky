@@ -11,4 +11,6 @@ urlpatterns = [
     path('channel-update/<str:pk>/', views.channelUpdate, name='channel-update'),
     path('channel-delete/<str:pk>/', views.channelDelete, name='channel-delete'),
 
+    path('songs-list/', views.songsList, name='songs-list'),
+
 ]

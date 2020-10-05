@@ -3,8 +3,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse
 
-from .models import Channel
-from .serializers import ChannelSerializer
+from .models import Channel, Song, Plays
+from .serializers import ChannelSerializer, SongSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -15,6 +15,7 @@ def apiOverview(request):
         'Create': '/channels-create/',
         'Update': '/channels-update/<str:pk>/',
         'Delete': '/channels-delete/<str:pk>/',
+        
         
     }
     return JsonResponse(api_urls)
@@ -57,6 +58,13 @@ def channelDelete(request, pk):
     channel.delete()
 
     return JsonResponse(serializer.data)
+
+@api_view(['GET'])
+def songsList(request):
+    songs = Song.objects.all()
+    serializer = SongSerializer(songs, many=True)
+
+    return JsonResponse(serializer.data, safe=False)
 
 
 

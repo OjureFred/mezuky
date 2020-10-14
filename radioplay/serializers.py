@@ -14,7 +14,12 @@ class SongSerializer(serializers.ModelSerializer):
 
 class PlaysSerializer(serializers.ModelSerializer):
     song = SongSerializer(read_only=True)
+    count = serializers.IntegerField(
+        source='channels.count',
+        read_only=True
+    )
     channels = ChannelSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Plays
         

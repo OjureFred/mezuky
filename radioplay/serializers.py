@@ -13,6 +13,9 @@ class SongSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PlaysSerializer(serializers.ModelSerializer):
+    song = SongSerializer(read_only=True)
+    channels = ChannelSerializer(many=True, read_only=True)
     class Meta:
         model = Plays
-        fields = '__all__'
+        
+        exclude = ('date',)

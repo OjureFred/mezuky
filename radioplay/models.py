@@ -21,9 +21,9 @@ class Channel(models.Model):
 
 class Plays(models.Model):
     song = models.ForeignKey(Song, blank=True, null=True, on_delete= models.CASCADE)
-    channel = models.ForeignKey(Channel, blank=True, null=True, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True, null=True)
-    plays = models.IntegerField(default=1)
-
+       
+    channels = models.ManyToManyField(Channel, related_name='plays')
+    
     def __str__(self):
         return self.song.ISRC
